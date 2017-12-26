@@ -4,7 +4,7 @@ import java.util.Vector;
 
 /**
  *
- * ÓĞ6¸öĞ¡ÓÚ100µÄÕıÕûÊı£¬Ã¿¸öÊıÖĞ¶¼º¬ÓĞ6£¬ËüÃÇµÄºÍÊÇ100£¬Çó³öÕâ6¸öÊı
+ * æœ‰6ä¸ªå°äº100çš„æ­£æ•´æ•°ï¼Œæ¯ä¸ªæ•°ä¸­éƒ½å«æœ‰6ï¼Œå®ƒä»¬çš„å’Œæ˜¯100ï¼Œæ±‚å‡ºè¿™6ä¸ªæ•°
  *
  * @author Benzolamps
  *
@@ -16,39 +16,39 @@ public class Six {
 	public static Vector<int[]> cases = new Vector<int[]>();
 
 	public static void main(String[] args) {
-		for (int i = 0; i < 100; i++) { // ÕÒ³öËùÓĞ´ø6µÄÊı×Ö
+		for (int i = 0; i < 100; i++) { // æ‰¾å‡ºæ‰€æœ‰å¸¦6çš„æ•°å­—
 			if (i / 10 == 6 || i % 10 == 6) {
 				options.add(i);
 			}
 		}
-		long startTime = System.currentTimeMillis();    //»ñÈ¡¿ªÊ¼Ê±¼ä
-		circle(); // ½øĞĞµİ¹é
-		long endTime = System.currentTimeMillis();    //»ñÈ¡½áÊøÊ±¼ä
-		System.out.println("³ÌĞòÔËĞĞÊ±¼ä£º" + (endTime - startTime) + " ms");    //Êä³ö³ÌĞòÔËĞĞÊ±¼ä
+		long startTime = System.currentTimeMillis(); // è·å–å¼€å§‹æ—¶é—´
+		circle(); // è¿›è¡Œé€’å½’
+		long endTime = System.currentTimeMillis(); // è·å–ç»“æŸæ—¶é—´
+		System.out.println("ç¨‹åºè¿è¡Œæ—¶é—´ï¼š" + (endTime - startTime) + " ms"); // è¾“å‡ºç¨‹åºè¿è¡Œæ—¶é—´
 	}
 
-	public static void circle() { // µİ¹éÑ­»·
-		for (int i = 0; i < options.size(); i++) { 
+	public static void circle() { // é€’å½’å¾ªç¯
+		for (int i = 0; i < options.size(); i++) {
 			stack.push(options.get(i));
-			
-			if (stackSum() == 100) { // µ±ºÍÎª100²¢ÇÒÕ»´óĞ¡Îª6µÄÊ±ºò·ûºÏÌõ¼ş
+
+			if (stackSum() == 100) { // å½“å’Œä¸º100å¹¶ä¸”æ ˆå¤§å°ä¸º6çš„æ—¶å€™ç¬¦åˆæ¡ä»¶
 				if (stack.size() == 6) {
 					int[] figures = stackToArray();
 					addToCases(figures);
 				}
-			} else if ((stackSum() > 100)) { // ÓÅ»¯Ëã·¨£¬È¥µô else if Óï¾ä¿é³ÌĞòÖ´ĞĞÊ±¼ä 20+s
-				// µ±ºÍ´óÓÚ100ºó£¬³öÕ»£¬ÍË³öµ±Ç°Ñ­»·
+			} else if ((stackSum() > 100)) { // ä¼˜åŒ–ç®—æ³•ï¼Œå»æ‰ else if è¯­å¥å—ç¨‹åºæ‰§è¡Œæ—¶é—´ 20+s
+				// å½“å’Œå¤§äº100åï¼Œå‡ºæ ˆï¼Œé€€å‡ºå½“å‰å¾ªç¯
 				stack.pop();
 				break;
 			}
-			if (stack.size() < 6) { // ÏÂÒ»ÂÖÑ­»·
+			if (stack.size() < 6) { // ä¸‹ä¸€è½®å¾ªç¯
 				circle();
 			}
 			stack.pop();
 		}
 	}
 
-	public static int stackSum() { // Õ»ÖĞÔªËØÇóºÍ
+	public static int stackSum() { // æ ˆä¸­å…ƒç´ æ±‚å’Œ
 		int sum = 0;
 		for (int i = 0; i < stack.size(); i++) {
 			sum += stack.get(i);
@@ -56,7 +56,7 @@ public class Six {
 		return sum;
 	}
 
-	public static int[] stackToArray() { // ½«Õ»ÖĞÔªËØ´æµ½Êı×é
+	public static int[] stackToArray() { // å°†æ ˆä¸­å…ƒç´ å­˜åˆ°æ•°ç»„
 		int[] figures = new int[stack.size()];
 		for (int i = 0; i < figures.length; i++) {
 			figures[i] = stack.get(i);
@@ -64,18 +64,18 @@ public class Six {
 		return figures;
 	}
 
-	public static void addToCases(int[] figures) { // Êä³ö½á¹û²¢ÅĞ¶ÏÖØ¸´
+	public static void addToCases(int[] figures) { // è¾“å‡ºç»“æœå¹¶åˆ¤æ–­é‡å¤
 		Arrays.sort(figures);
 		for (int i = 0; i < cases.size(); i++) {
-			if (Arrays.equals(figures, cases.get(i))) { // ÅĞ¶ÏÁ½¸öÊı×éÊÇ·ñ´óĞ¡ÏàµÈ£¬Ã¿Î»ÊıÒ²ÏàµÈ
+			if (Arrays.equals(figures, cases.get(i))) { // åˆ¤æ–­ä¸¤ä¸ªæ•°ç»„æ˜¯å¦å¤§å°ç›¸ç­‰ï¼Œæ¯ä½æ•°ä¹Ÿç›¸ç­‰
 				return;
 			}
-		}	
+		}
 		cases.add(figures);
-		// ¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü
-		// ¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü
-		// È¥µôÖØ¸´Öµ
-		
+		// â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘
+		// â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘â†‘
+		// å»æ‰é‡å¤å€¼
+
 		String output = "100=";
 		for (int item : figures) {
 			output += item + "+";
